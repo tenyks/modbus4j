@@ -34,6 +34,7 @@ public class MasterTest3 {
         master.setTimeout(4000);
         master.setRetries(1);
 
+
         BatchRead<Integer> batch = new BatchRead<Integer>();
         //        batch.addLocator(0, new ModbusLocator(1, RegisterRange.COIL_STATUS, 2048, DataType.BINARY));
         //        batch.addLocator(1, new ModbusLocator(1, RegisterRange.COIL_STATUS, 2049, DataType.BINARY));
@@ -56,7 +57,7 @@ public class MasterTest3 {
         batch.addLocator(0, BaseLocator.holdingRegister(1, 100, DataType.TWO_BYTE_INT_SIGNED));
 //        batch.addLocator(1, BaseLocator.holdingRegister(1, 2, DataType.TWO_BYTE_INT_SIGNED));
 
-        ModbusRequest req1 = new ReadHoldingRegistersRequest(1, 100, 1);
+        ModbusRequest req1 = new ReadHoldingRegistersRequest(2, 0, 1);
 
         try {
             master.init();
@@ -69,7 +70,6 @@ public class MasterTest3 {
 
                 ReadHoldingRegistersResponse response = (ReadHoldingRegistersResponse)master.send(req1);
                 System.out.println(HexBin.encode(response.getData()));
-
 
                 Thread.sleep(2000);
             }
